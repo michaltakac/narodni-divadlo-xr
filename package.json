@@ -1,0 +1,31 @@
+{
+  "name": "multiuser-developer-app",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": { "dev": "vite", "build": "vite build", "preview": "vite preview" },
+  "dependencies": {
+    "@dimforge/rapier3d-compat": "0.13.1",
+    "@react-three/drei": "9.105.0",
+    "@react-three/fiber": "8.17.5",
+    "@react-three/rapier": "1.4.0",
+    "@react-three/uikit": "1.0.76",
+    "@react-three/xr": "6.6.28",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "three": "0.170.0",
+    "y-protocols": "1.0.7",
+    "y-websocket": "3.1.0",
+    "yjs": "13.6.33",
+    "zustand": "4.5.7"
+  },
+  "devDependencies": {
+    "@iwer/devui": "1.1.2",
+    "@iwer/sem": "0.2.5",
+    "@vitejs/plugin-react": "5.1.2",
+    "iwer": "2.5.0",
+    "vite": "7.3.0"
+  },
+  "pnpm": { "overrides": { "zustand": "4.5.7", "three": "0.170.0" } },
+  "overrides": { "zustand": "4.5.7", "three": "0.170.0" }
+}

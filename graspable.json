@@ -1,0 +1,21 @@
+{
+  "name": "Národní divadlo, together",
+  "template": "multiuser-developer",
+  "forkedFrom": "kkqf82wc",
+  "id": "927e1c82",
+  "createdAt": "2026-10-06T02:00:59.712Z",
+  "install": "done",
+  "published": {
+    "appId": "0e6gz0em",
+    "slug": "warm-coral-667",
+    "url": "https://warm-coral-667.graspable.cloud/",
+    "at": "2026-10-06T02:01:45.799Z",
+    "visibility": "public"
+  },
+  "github": {
+    "owner": "michaltakac",
+    "repo": "narodni-divadlo-xr",
+    "url": "https://github.com/michaltakac/narodni-divadlo-xr",
+    "private": false
+  }
+}

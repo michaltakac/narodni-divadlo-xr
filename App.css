@@ -1,0 +1,186 @@
+/* The look of the interface is Lukáš Eršil's and lives with his code (lib/nd/ui.css, loaded by
+   components/Overlay.jsx). Only what the canvas needs is here. */
+html, body, #root {
+  margin: 0;
+  height: 100%;
+  overflow: hidden;
+  background: #000;
+}
+
+canvas {
+  display: block;
+  touch-action: none;
+}
+
+/* Walking on a touch screen (components/Touch.jsx), in the colours of his interface. --touch-bottom is kept
+   above the timeline and the cards by the component. */
+.touch {
+  position: fixed;
+  left: calc(env(safe-area-inset-left, 0px) + var(--touch-left, 16px));
+  bottom: var(--touch-bottom, 140px);
+  z-index: 3;
+  display: flex;
+  align-items: flex-end;
+  gap: 10px;
+  pointer-events: none;
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-touch-callout: none;
+}
+.touch .stick {
+  position: relative;
+  width: 112px;
+  height: 112px;
+  border-radius: 50%;
+  background: var(--panel);
+  border: 1px solid var(--line-hi);
+  pointer-events: auto;
+  touch-action: none;
+}
+.touch .stick i {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 44px;
+  height: 44px;
+  margin: -22px 0 0 -22px;
+  border-radius: 50%;
+  background: var(--accent);
+  pointer-events: none;
+}
+.touch .rise { display: grid; gap: 8px; pointer-events: auto; }
+.touch .rise button {
+  width: 48px;
+  height: 48px;
+  background: var(--panel);
+  border: 1px solid var(--line-hi);
+  color: var(--fg);
+  font-size: 15px;
+  touch-action: none;
+}
+.touch .rise button:active { background: var(--accent); color: var(--on-accent); }
+
+/* The wardrobe on a computer (components/Wardrobe.jsx): a card of his interface, left of the views panel. */
+.wardrobe {
+  position: fixed;
+  z-index: 5;
+  top: calc(env(safe-area-inset-top, 0px) + 60px);
+  right: 264px;
+  width: 372px;
+  max-height: calc(100% - 176px);
+  overflow: auto;
+}
+.wardrobe .wd-years { margin-left: auto; margin-right: 26px; font-size: var(--fs-small); color: var(--muted); }
+.wardrobe .wd-top { display: grid; grid-template-columns: 120px 1fr; gap: 12px; }
+.wardrobe .wd-preview { width: 120px; height: 200px; background: var(--raised); border: 1px solid var(--line); }
+.wardrobe .wd-side { display: grid; gap: 9px; align-content: start; min-width: 0; }
+.wardrobe .wd-field { display: grid; gap: 4px; }
+.wardrobe .wd-field > span { font-size: var(--fs-small); color: var(--fg-2); }
+.wardrobe .wd-field input {
+  box-sizing: border-box;
+  width: 100%;
+  height: 32px;
+  padding: 0 9px;
+  background: var(--raised);
+  border: 1px solid var(--line);
+  color: var(--fg);
+  font: 500 var(--fs-ui) var(--body);
+}
+.wardrobe .wd-field input:hover { border-color: var(--line-hi); }
+.wardrobe .wd-swatches { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; }
+.wardrobe .wd-swatch { height: 26px; padding: 0; border: 1px solid var(--line-hi); cursor: pointer; }
+.wardrobe .wd-swatch[aria-pressed="true"] { outline: 2px solid var(--accent); outline-offset: 1px; }
+.wardrobe .wd-actions { display: flex; flex-wrap: wrap; gap: 6px; }
+.wardrobe .wd-actions .chip-btn { height: 32px; padding: 0 10px; }
+.wardrobe .wd-list { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; margin-top: 12px; }
+.wardrobe .wd-outfit { display: grid; grid-template-columns: 36px 1fr; gap: 8px; align-items: center; padding: 4px 6px 4px 4px; min-width: 0; }
+.wardrobe .wd-outfit img { width: 36px; height: 50px; display: block; background: #0d0d0d; }
+.wardrobe .wd-outfit[aria-pressed="true"] img { background: #f6f1e4; }
+.wardrobe .wd-outfit b { display: block; font-weight: 500; line-height: 1.25; }
+.wardrobe .wd-outfit small { display: block; margin-top: 2px; font-size: 10px; line-height: 1.25; opacity: 0.72; }
+@media (max-width: 1240px) and (min-width: 761px) {
+  .wardrobe { top: calc(env(safe-area-inset-top, 0px) + 102px); max-height: calc(100% - 218px); }
+}
+@media (max-width: 760px) {
+  .wardrobe { top: auto; bottom: var(--above-tl); left: 16px; right: 16px; width: auto; max-height: 56%; z-index: 6; }
+  .wardrobe .wd-top { grid-template-columns: 84px 1fr; }
+  .wardrobe .wd-preview { width: 84px; height: 140px; }
+}
+
+/* The chat on a computer (components/Chat.jsx): a card of his interface in the lower left corner, above his own
+   cards there (--chat-left, --chat-bottom and --chat-room are kept by the component), and the tab it folds into. */
+.chat {
+  position: fixed;
+  z-index: 4;
+  left: calc(env(safe-area-inset-left, 0px) + var(--chat-left, 16px));
+  bottom: var(--chat-bottom, var(--above-tl));
+  width: min(var(--chat-width, 320px), calc(100vw - 32px));
+  display: grid;
+  gap: 8px;
+  padding: 10px 12px 12px;
+}
+.chat h3 { margin: 0; }
+.chat h3 .mini button[aria-pressed="true"] { color: var(--accent); }
+.chat-list, .chat-people {
+  list-style: none;
+  margin: 0;
+  padding: 0 6px 0 0;
+  height: clamp(54px, calc(var(--chat-room, 300px) - 112px), 176px);
+  overflow-y: auto;
+  display: grid;
+  align-content: start;
+  gap: 7px;
+  font-size: var(--fs-text);
+  line-height: 1.4;
+  scrollbar-width: thin;
+  scrollbar-color: var(--line-hi) transparent;
+}
+.chat-list li { min-width: 0; }
+.chat-list b { font-weight: 700; margin-right: 8px; }
+.chat-list time { font-size: var(--fs-eyebrow); color: var(--muted); font-variant-numeric: tabular-nums; }
+.chat-list p { margin: 1px 0 0; color: var(--fg); overflow-wrap: anywhere; white-space: pre-wrap; }
+.chat .none { color: var(--muted); font-size: var(--fs-small); }
+.chat-people li { display: grid; grid-template-columns: 10px 1fr auto; gap: 9px; align-items: center; min-width: 0; }
+.chat-people li.none { display: block; }
+.chat-people i { width: 10px; height: 10px; border-radius: 50%; }
+.chat-people span { min-width: 0; }
+.chat-people b { display: block; font-weight: 500; color: var(--fg); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.chat-people small { display: block; font-size: var(--fs-eyebrow); color: var(--muted); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.chat-people .chip-btn { height: 26px; padding: 0 9px; font-size: var(--fs-small); }
+.chat-form { display: flex; gap: 6px; align-items: center; }
+.chat-form input {
+  box-sizing: border-box;
+  flex: 1;
+  min-width: 0;
+  height: 32px;
+  padding: 0 9px;
+  background: var(--raised);
+  border: 1px solid var(--line);
+  color: var(--fg);
+  font: 500 var(--fs-ui) var(--body);
+}
+.chat-form input:hover { border-color: var(--line-hi); }
+.chat-form input:focus { outline: none; border-color: var(--accent); }
+.chat-form .chip-btn { height: 32px; }
+.chat-count { font-size: var(--fs-eyebrow); color: var(--muted); font-variant-numeric: tabular-nums; }
+.chat-tab {
+  position: fixed;
+  z-index: 4;
+  left: calc(env(safe-area-inset-left, 0px) + var(--chat-left, 16px));
+  bottom: var(--chat-bottom, var(--above-tl));
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  box-sizing: border-box;
+  height: 32px;
+  padding: 0 12px;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  color: var(--fg);
+  font: 700 var(--fs-eyebrow) var(--body);
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+.chat-tab:hover { border-color: var(--line-hi); }
+.chat-tab b { min-width: 18px; padding: 2px 5px; box-sizing: border-box; background: var(--accent); color: var(--on-accent); letter-spacing: 0; text-align: center; font-variant-numeric: tabular-nums; }
